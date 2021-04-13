@@ -29,15 +29,17 @@ def title_search():
     """Search OMDB API using form input."""
 
     # get movie title from form 
-    search_term = request.args.get("title-search")
+    search_term = request.args.get("title-field")
     print(f"searching omdb for {search_term}")
 
     # send search request to omdb api 
     search_response = requests.get(f"http://www.omdbapi.com/?apikey={OMDB_KEY}"\
-        f"&s={search_term}")
+        f"&s={search_term}&type=movie")
+
+    # turn response object into dict
     search_res_dict = search_response.json()
 
-    return search_res_dict 
+    return search_res_dict
 
 
 # ========== RUN APP ==========
