@@ -2,6 +2,11 @@ body {
     background-color: rgb(241, 240, 240);
 }
 
+h1 {
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+
 #results, #nominations {
     display: inline-block;
 }

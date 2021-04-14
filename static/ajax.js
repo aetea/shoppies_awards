@@ -38,7 +38,7 @@ function addNomination(evt) {
             console.log("nomination done for");
             console.log(res);
 
-            let delButton = `<button class="del-nom btn btn-outline-secondary"` +
+            let delButton = `<button class="del-nom btn btn-sm btn-outline-secondary"` +
                             `value=${movieId} name="${movieInfo}">Remove` + 
                             `</button>`
             let newMovieRow = `<li id=${movieId}>${movieInfo} ${delButton}</li>`
@@ -77,7 +77,7 @@ $("#title-search").on("submit", (evt) => {
             let movieYear = res.Search[i].Year;
             let movieId = res.Search[i].imdbID;
 
-            let nomButton = `<button class="nominate btn btn-outline-secondary"` + 
+            let nomButton = `<button class="nominate btn btn-sm btn-outline-secondary"` + 
                             `value=${movieId} ` + 
                             `name="${movieTitle} (${movieYear})">Nominate` + 
                             `</button>`

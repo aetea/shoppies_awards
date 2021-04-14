@@ -34,7 +34,7 @@
                 {% if nom_movies %}
                     {% for key, values in nom_movies.items() %}
                         <li id={{key}}>{{ values["title"] }} ({{ values["year"] }}) 
-                            <button class="del-nom btn btn-outline-secondary" 
+                            <button class="del-nom btn btn-sm btn-outline-secondary" 
                             value={{key}}>Remove</button>
                         </li>
                     {% endfor %}
