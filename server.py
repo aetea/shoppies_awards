@@ -37,7 +37,7 @@ def index():
             }
 
         pprint.pprint(nom_movies) 
-        
+
     return render_template("index.html", nom_movies=nom_movies)
 
 
@@ -79,8 +79,10 @@ def add_nomination():
         session.modified = True     
         # * needed bec changes on mutable structures not auto picked up 
         print(f"session noms is now {session['noms']}")
+
+    status = str(len(session.get("noms")))
     
-    return movie_id
+    return status
 
 
 @app.route("/remove-nom")
@@ -94,7 +96,9 @@ def remove_nomination():
     session["noms"].remove(movie_id)
     session.modified = True  
 
-    return "ok"
+    status = str(len(session.get("noms")))
+
+    return status
 
 
 
