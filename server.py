@@ -9,10 +9,13 @@ import os, requests, pprint
 # initialise flask app
 app = Flask(__name__)
 
+# if using python-dotenv
 app.secret_key = os.getenv("APP_KEY")
-
-# OMDB_KEY = os.environ["OMDB_KEY"]
 OMDB_KEY = os.getenv("OMDB_KEY")
+
+# # if using secrets.sh
+# app.secret_key = os.environ["APP_KEY"]
+# OMDB_KEY = os.environ["OMDB_KEY"]
 
 
 # ========= APP ROUTES ==========
