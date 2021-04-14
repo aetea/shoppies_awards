@@ -38,8 +38,8 @@ function addNomination(evt) {
             console.log("nomination done for");
             console.log(res);
 
-            let delButton = `<button class="del-nom" value=${movieId} ` + 
-                            `name="${movieInfo}">Remove` + 
+            let delButton = `<button class="del-nom btn btn-outline-secondary"` +
+                            `value=${movieId} name="${movieInfo}">Remove` + 
                             `</button>`
             let newMovieRow = `<li id=${movieId}>${movieInfo} ${delButton}</li>`
             $("#nom-list").append(`${newMovieRow}`);
@@ -64,13 +64,11 @@ $("#title-search").on("submit", (evt) => {
     const searchTerm = $("#title-field").val();
     // send request to server
     $.get("/search", {"title-field": searchTerm}, (res) => {
-        // handle response 
-        $("#results-header").html(`Results for ${searchTerm}`);
-
-        // display - test
         console.log(res);
-        const firstTitle = res.Search[0].Title;
-        $("#results-list").html(firstTitle);
+        $("#results-list").empty();
+
+        // handle response 
+        $("#results-header").html(`Results for "${searchTerm}"`);
 
         // loop thru 5 results
         // add each result to results-list using index - title, year, button
@@ -79,7 +77,8 @@ $("#title-search").on("submit", (evt) => {
             let movieYear = res.Search[i].Year;
             let movieId = res.Search[i].imdbID;
 
-            let nomButton = `<button class="nominate" value=${movieId} ` + 
+            let nomButton = `<button class="nominate btn btn-outline-secondary"` + 
+                            `value=${movieId} ` + 
                             `name="${movieTitle} (${movieYear})">Nominate` + 
                             `</button>`
             $("#results-list").append(`<li>${movieTitle} (${movieYear}) ${nomButton}</li>`);

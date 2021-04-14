@@ -17,24 +17,25 @@
 <body>
 <div class="container">
     <div class="row"><h1>The Shoppies</h1></div>
-    <div class="row" id="search-area">
+    <div class="row shadow-sm p-3 bg-body border rounded" id="search-area">
         <form action="/search" id="title-search">
             <p><label for="title-field">Movie title</label></p>
             <input type="text" name="title-field" id="title-field">
         </form>
     </div>
-    <div class="row">
-        <div class="col" id="results">
+    <div class="row my-4">
+        <div class="col shadow-sm p-3 me-2 bg-body border rounded" id="results">
             <h3 id="results-header">Results</h3>
             <ul id="results-list"></ul>
         </div>
-        <div class="col" id="nominations">
+        <div class="col shadow-sm p-3 ms-2 bg-body border rounded" id="nominations">
             <h3>Nominations</h3>
             <ul id="nom-list">
                 {% if nom_movies %}
                     {% for key, values in nom_movies.items() %}
                         <li id={{key}}>{{ values["title"] }} ({{ values["year"] }}) 
-                            <button class="del-nom" value={{key}}>Remove</button>
+                            <button class="del-nom btn btn-outline-secondary" 
+                            value={{key}}>Remove</button>
                         </li>
                     {% endfor %}
                 {% endif %}

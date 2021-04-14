@@ -1,4 +1,12 @@
+body {
+    background-color: rgb(241, 240, 240);
+}
 
 #results, #nominations {
     display: inline-block;
 }
+
+.roundbox {
+    border-radius: 3px;
+    background-color: white;
+}  
