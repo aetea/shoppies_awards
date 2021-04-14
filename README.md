@@ -5,7 +5,7 @@ Pick your top 5 movies for the Shoppies Awards!
 # Features
 
 * Search OMDB for movies and nominate 5 favourites for the Shoppies Awards
-* Nominated movies will not be renominated 
+* Movies can only be nominated once (no matter how much you love them)
 * Nominations can be removed if you change your mind
 * When 5 movies have been nominated, an alert is shown
 * Nominated movies persist even after navigating away from the page 
@@ -18,8 +18,11 @@ Pick your top 5 movies for the Shoppies Awards!
 ### 🔑 Prep
 Obtain an API key from OMDB.com
 Place it in a file called secrets.sh
+
     ```export OMDB_KEY="your_key"```
-Set the global variable by running in your terminal (only needed once per terminal)
+    
+Set the environment variable by running in your terminal (only needed once per terminal)
+
     ```$ source secrets.sh```
 
 ## Setup Instructions
