@@ -1,6 +1,7 @@
 # Overview
 
 Pick your top 5 movies for the Shoppies Awards! 
+
 View hosted version at [aetea.pythonanywhere.com](http://aetea.pythonanywhere.com/)
 
 # Features
@@ -30,11 +31,14 @@ View hosted version at [aetea.pythonanywhere.com](http://aetea.pythonanywhere.co
     ```$ source secrets.sh```
 
 4. Check server.py to make sure environment variable is being accessed with 
+
     ```SECRET_KEY = os.environ["SECRET_KEY"]```
 
 *Or, if you are using python-dotenv*
+
 2. Place API key in a file called .env
 3. Set the environment variable by running in terminal 
+
     ```load_dotenv("~/project/.env")``` 
 
     see https://help.pythonanywhere.com/pages/environment-variables-for-web-apps/ 
@@ -53,7 +57,7 @@ View hosted version at [aetea.pythonanywhere.com](http://aetea.pythonanywhere.co
 
     ```$ pip3 install -r requirements.txt```
 
-    3. a) Source secrets.sh or .env if not yet done for this shell
+    a) Source secrets.sh or .env if not yet done for this shell
 
 4. Run the app 
 
