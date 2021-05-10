@@ -9,13 +9,14 @@ function removeNomination(evt) {
 
     // send server request to remove from session 
     $.get("/remove-nom", {"movie_id": movieId}, (res) => {
-        if (res === "ok") {
-            $(`#${movieId}`).remove();
-        }
+        $(`#${movieId}`).remove();
+        // hide banner if under 5
+        if (res==="4") {
+            $("#done-banner").addClass("invisible");
+            $("#done-banner").removeClass("visible");
+        };
     });
-
-    // remove line item from nominated div
-}
+};
 
 
 // --- add nomination function ---
@@ -48,11 +49,16 @@ function addNomination(evt) {
             $("button.del-nom").on("click", (evt) => {
                 removeNomination(evt);
             });
+
+            // display banner if 5 noms reached
+            if (res==="5") {
+                $("#done-banner").addClass("visible");
+                $("#done-banner").removeClass("invisible");
+            };
         }; 
     });
 
 };
-
 
 
 // ======= Event Listeners ========
@@ -101,19 +107,17 @@ $("#title-search").on("submit", (evt) => {
     });
 });
 
-// === nominate movie ===
-$("button.nominate").on("click", (evt) => {
-    // evt.preventDefault();
-    // grab relevant data
-    console.log("clicked!");
-    alert("i see you!");
 
-    // check if total_nominations < 5
-    // add movie to session obj OR error dialog
-    // update nominated list to add movie
-});
+// ======= RUN ON PAGE LOAD ===========
 
-// remove nomination
+// --- listener for remove buttons on page load ---
 $("button.del-nom").on("click", (evt) => {
     removeNomination(evt);
 });
+
+// --- show banner if 5 noms on page load ---
+if (currentCount === 5) {
+    // show banner if  5
+    $("#done-banner").addClass("visible");
+    $("#done-banner").removeClass("invisible");
+};
