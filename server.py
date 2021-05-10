@@ -1,16 +1,18 @@
-"""Shopify Frontend Internship Project: 
+"""Shopify Frontend Internship Project:
 Single-Page Web App to search and nominate movies for Shoppies Awards.
 """
 
 # import flask, jinja & session requirements
-from flask import Flask, render_template, make_response, request, session, flash 
+from flask import Flask, render_template, make_response, request, session, flash
 import os, requests, pprint
 
 # initialise flask app
 app = Flask(__name__)
-app.secret_key = "temp-dev-skey"
 
-OMDB_KEY = os.environ["OMDB_KEY"]
+app.secret_key = os.getenv("APP_KEY")
+
+# OMDB_KEY = os.environ["OMDB_KEY"]
+OMDB_KEY = os.getenv("OMDB_KEY")
 
 
 # ========= APP ROUTES ==========
@@ -18,26 +20,26 @@ OMDB_KEY = os.environ["OMDB_KEY"]
 # index
 @app.route("/")
 def index():
-    """Return main page for Shoppies.""" 
+    """Return main page for Shoppies."""
 
-    # session.clear() 
+    # session.clear()
     nom_movies = {}
-    
-    # if session has noms, get nominated movie info 
+
+    # if session has noms, get nominated movie info
     if session.get("noms") != None:
         print("found previous nominations")
 
         for movie_id in session["noms"]:
             api_resp = requests.get(f"http://www.omdbapi.com/?apikey={OMDB_KEY}"\
-            f"&i={movie_id}") 
+            f"&i={movie_id}")
             api_dict = api_resp.json()
             nom_movies[movie_id] = {
                 "title": api_dict["Title"],
                 "year": api_dict["Year"]
             }
 
-        pprint.pprint(nom_movies) 
-        
+        pprint.pprint(nom_movies)
+
     return render_template("index.html", nom_movies=nom_movies)
 
 
@@ -46,11 +48,11 @@ def index():
 def title_search():
     """Search OMDB API using form input."""
 
-    # get movie title from form 
+    # get movie title from form
     search_term = request.args.get("title-field")
     print(f"searching omdb for {search_term}")
 
-    # send search request to omdb api 
+    # send search request to omdb api
     search_response = requests.get(f"http://www.omdbapi.com/?apikey={OMDB_KEY}"\
         f"&s={search_term}&type=movie")
 
@@ -73,13 +75,13 @@ def add_nomination():
 
     elif len(session.get("noms")) == 5:
         return "full"
-    
+
     else:
         session["noms"].append(movie_id)
-        session.modified = True     
-        # * needed bec changes on mutable structures not auto picked up 
+        session.modified = True
+        # * needed bec changes on mutable structures not auto picked up
         print(f"session noms is now {session['noms']}")
-    
+
     return movie_id
 
 
@@ -92,7 +94,7 @@ def remove_nomination():
     print(session.get("noms"))
 
     session["noms"].remove(movie_id)
-    session.modified = True  
+    session.modified = True
 
     return "ok"
 
@@ -101,4 +103,4 @@ def remove_nomination():
 # ========== RUN APP ==========
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True) 
+    app.run(host="0.0.0.0", debug=True)
